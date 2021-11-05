@@ -1,6 +1,7 @@
 package Liang.chpt25;
 
 public class Heap<E extends Comparable> {
+
   private java.util.ArrayList<E> list = new java.util.ArrayList<E>();
 
   /** Create a default heap */
@@ -12,9 +13,25 @@ public class Heap<E extends Comparable> {
     for (E object : objects) add(object);
   }
 
+  public void printHeap(){
+    if (list.size() > 0){
+      System.out.println("Heap: ");
 
-  public String printHeap(){
-    return list.toString();
+      for (E e : list) System.out.printf("%s ", e);
+      System.out.println();
+
+      //dump the heap
+      for(int currentIndx=0; currentIndx < list.size(); currentIndx++){
+        System.out.printf("Parent: %s Depth: %s\n", list.get(currentIndx), (int)(Math.log10(currentIndx+1)/Math.log10(2)));
+        if(2*currentIndx + 1 < list.size() )
+          System.out.printf("\tleft child: %s \n", list.get(2*currentIndx + 1));
+        if(2*currentIndx + 2 < list.size() )
+          System.out.printf("\tright child: %s \n", list.get(2*currentIndx + 2));
+      }
+      System.out.println();
+    } else {
+      System.out.println("The heap is empty.");
+    }
   }
 
   /** Add a new object into the heap */
