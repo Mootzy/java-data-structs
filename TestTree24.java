@@ -61,13 +61,22 @@ public class TestTree24 {
   }
 
   public static <E extends Comparable<E>>
-      void printTree(Tree<E> tree) {
+  void printTree(Tree<E> tree) {
     // Traverse tree
-    System.out.print("\nPreorder: ");
+    System.out.print("\nPre-order: ");
     tree.preorder();
-    System.out.print("\nThe number of nodes is " + tree.getSize());
+    System.out.print("\npost-order: ");
+    tree.postorder();
+    System.out.println("\n in order: ");
+    tree.inorder();
+    System.out.println("\n Inorder-Iterator: ");
+    for (E e : tree){
+      System.out.println(e + " ");
+    }
+    System.out.print("\nThe number of nodes is " + tree.getSize() + "\n");
     System.out.println();
   }
+
 }
 
 

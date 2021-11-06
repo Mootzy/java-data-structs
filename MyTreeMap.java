@@ -84,6 +84,7 @@ public class MyTreeMap<K extends Comparable<K>,V> implements MyOrderedMap<K, V>{
 
     /** Return a set consisting of the values in this map */
     public java.util.Set<V> values(){
+
         java.util.Set<V> set = new java.util.HashSet<V>();
         Iterator<V> iter = mapTree.valueSet();
 
@@ -110,7 +111,6 @@ public class MyTreeMap<K extends Comparable<K>,V> implements MyOrderedMap<K, V>{
     @Override
     public Entry<K,V> firstEntry(){
 
-       // ArrayList<Entry<K, V>> values = new ArrayList(mapTree);
 
         Entry<K,V> min = null;
         for (Entry<K,V> entry : mapTree.entrySet()){
@@ -118,6 +118,8 @@ public class MyTreeMap<K extends Comparable<K>,V> implements MyOrderedMap<K, V>{
                 min = entry;
             }
         }
+
+
 
         return min;
     }
@@ -288,7 +290,8 @@ public class MyTreeMap<K extends Comparable<K>,V> implements MyOrderedMap<K, V>{
 
             /** Inorder traversal from a subtree */
             private void inorder(TreeNode<K> root) {
-                if (root == null)return;
+                if (root == null)
+                    return;
                 inorder(root.left);
                 elist.add((Entry<K,V>)(root.element));
                 inorder(root.right);

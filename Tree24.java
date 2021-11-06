@@ -7,6 +7,7 @@ package Liang.chpt25;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Tree24<E extends Comparable<E>> implements Tree<E> {
 
@@ -387,7 +388,7 @@ public class Tree24<E extends Comparable<E>> implements Tree<E> {
   @Override
   /** Inorder traversal from the root*/
   //public api call
-  public void inorder() {
+  public void  inorder() {
     inorder(root);
   }
 
@@ -406,8 +407,43 @@ public class Tree24<E extends Comparable<E>> implements Tree<E> {
     if (root.elements.size() < root.child.size()) {
       inorder(root.child.get(root.child.size() - 1));
     }
+  } protected ArrayList<E> inorderElements() {
+    //case for empty
+    ArrayList<E> list = new ArrayList<>();
+    if (root == null) {
+      return null;
+    }
+    for (int i = 0; i < root.elements.size(); i++) {
+      if (i < root.child.size()) {
+        inorder(root.child.get(i));
+        list.add((E) root.child.get(i));
+      }
+      System.out.print(root.elements.get(i) + " ");
+    }
+    if (root.elements.size() < root.child.size()) {
+      inorder(root.child.get(root.child.size() - 1));
+    }
+    return list;
   }
+private ArrayList<E> inorderElementsArray(){
+    ArrayList<E> list = new ArrayList<>();
 
+  for (int i = 0; i < root.elements.size(); i++) {
+    if (i < root.child.size()) {
+      inorder(root.child.get(i));
+    }
+    System.out.print(root.elements.get(i) + " ");
+  }
+  if (root.elements.size() < root.child.size()) {
+    inorder(root.child.get(root.child.size() - 1));
+  }
+  return list;
+
+
+
+
+
+}
 
   /**
    * Postorder traversal from the root
@@ -445,29 +481,33 @@ public class Tree24<E extends Comparable<E>> implements Tree<E> {
   @Override
   /** Return an iterator to traverse elements in the tree */
   public java.util.Iterator<E> iterator() {
-
     return new InorderIterator();
   }
 
   // Inner class InorderIterator
   public class InorderIterator implements java.util.Iterator<E> {
 
-    // Store the elements in a list
+    private final java.util.ArrayList<E> list = Tree24.this.inorderElementsArray();
 
-    private final java.util.ArrayList<E> list = new java.util.ArrayList<E>();
+
     private int current = 0; // Point to the current element in list
 
     public InorderIterator() {
       inorder(root); // Traverse binary tree and store elements in list
     }
 
-    /**
-     * Inorder traversal from the root
-     * @param root
-     */
-    private void inorder(Tree24Node<E> root) {
-      inorder(Tree24.this.root);
-    }
+
+    private void inorder(Tree24Node<E> root) throws StackOverflowError {
+
+      try {
+        if (root == null) {
+          return;
+        }
+        inorder(root);
+      }
+       catch (StackOverflowError e) {
+       }
+      }
 
     /**
      * Inorder traversal from a subtree
@@ -476,9 +516,7 @@ public class Tree24<E extends Comparable<E>> implements Tree<E> {
       if (root == null) {
         return;
       }
-      inorder(root.left);
-      list.add(root.element);
-      inorder(root.right);
+
     }
 
     @Override
@@ -510,6 +548,7 @@ public class Tree24<E extends Comparable<E>> implements Tree<E> {
       list.clear(); // Clear the list
       inorder(root); // Rebuild the list
     }
+
   }
 
 
