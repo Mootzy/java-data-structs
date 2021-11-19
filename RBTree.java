@@ -329,6 +329,7 @@ public class RBTree<E extends Comparable<E>> extends BST<E> {
         if (root == null) return;
         System.out.print(root.element +
                 (((RBTreeNode<E>)root).isRed() ? " (red) " : " (black) "));
+
         preorder(root.left);
         preorder(root.right);
     }

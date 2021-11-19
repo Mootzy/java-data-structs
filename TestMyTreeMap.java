@@ -22,14 +22,6 @@ public class TestMyTreeMap {
         map.put("Smith", 65);
         map.put("Masterson", 55);
 
-
-        List<Integer> listValues = new ArrayList<>(map.values());
-        Collections.sort(listValues);
-        System.out.println("list values sorted " + listValues);
-
-
-        //System.out.println(map.values());
-
         System.out.println(map.size() + " entries in map: " + map);
         System.out.println("All the keys in the "+ map.keySet());
         System.out.println("All the values in the map "+ map.values());
